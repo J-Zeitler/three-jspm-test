@@ -2,6 +2,9 @@ import THREE from 'three.js'
 import StarGeometry from './starGeometry'
 import OrbitControls from './orbitControls'
 
+import simpleVert from './shaders/simple.vert!text'
+import simpleFrag from './shaders/simple.frag!text'
+
 // Scene + camera
 var camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 1, 100);
 camera.position.set(0, 0, 3);
@@ -15,18 +18,18 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setClearColor(0xffffff, 1);
 document.body.appendChild(renderer.domElement);
 
-// Lights
-var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-directionalLight.position.set(1, 1, 1);
-scene.add(directionalLight);
-
-var ambientLight = new THREE.AmbientLight(0x909090);
-scene.add(ambientLight);
-
 // Objects
 var g = new StarGeometry(1, 5);
 var m = new THREE.MeshLambertMaterial({ color: 0xffff00 });
-var star = new THREE.Mesh(g, m);
+var sm = new THREE.ShaderMaterial({
+  uniforms: {
+    lightDir: { type: 'v3', value: new THREE.Vector3(1, 1, 1) },
+    meshColor: { type: 'v3', value: new THREE.Vector3(1, 1, 0) },
+  },
+  vertexShader: simpleVert,
+  fragmentShader: simpleFrag
+});
+var star = new THREE.Mesh(g, sm);
 scene.add(star);
 star.rotation.z = 0.5*Math.PI;
 
