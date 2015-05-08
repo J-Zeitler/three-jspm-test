@@ -13,19 +13,17 @@ $ http-server -p 1337
 ### Build/Bundle
 *(Note: Not needed for development!)*
 
-This can be done directly with the jspm-cli by running:
+Bundling is done directly with the jspm-cli by running:
 
 ```shell
-$ jspm bundle-sfx src/main release/bundle.js
+$ jspm bundle src/main release/bundle.js
 ```
 
-or:
+To go back to separate file loading, run:
 
 ```shell
-jspm bundle-sfx --minify src/main release/bundle.js
+$ jspm unbundle
 ```
-
-Compare `release/index.html` to `intex.html` in the root. There are some manual glue but that is because there is no dedicated taskrunner in this project.
 
 ### Known issues
 
