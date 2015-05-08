@@ -16,7 +16,7 @@ $ http-server -p 1337
 Bundling is done directly with the jspm-cli by running:
 
 ```shell
-$ jspm bundle src/main release/bundle.js
+$ jspm bundle src/main build/bundle.js --inject
 ```
 
 To go back to separate file loading, run:
